@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 import codemining.ast.AstNodeSymbol;
 import codemining.ast.TreeNode;
 import codemining.ast.java.JavaAstTreeExtractor;
-import codemining.java.codeutils.MethodExtractor;
+import codemining.java.codedata.MethodRetriever;
 import codemining.java.tokenizers.JavaTokenizer;
 import codemining.util.data.Pair;
 
@@ -76,7 +76,7 @@ public class MethodNamingDatasetCreator {
 
 	private static Stream<MethodNameWithAst> getMethods(File file, File inputFolder) {
 		try {
-			return MethodExtractor.getMethods(file).stream()
+			return MethodRetriever.getMethodNodes(file).values().stream()
 					.filter(m -> m != null && m.getBody() != null && !m.isConstructor()).map(m -> {
 						final Tree tokens = getMethodAst(m);
 						return new MethodNameWithAst(file.toString().substring(inputFolder.toString().length()),

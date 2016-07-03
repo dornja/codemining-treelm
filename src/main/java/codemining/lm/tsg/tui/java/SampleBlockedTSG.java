@@ -19,7 +19,7 @@ import codemining.ast.java.BinaryJavaAstTreeExtractor;
 import codemining.ast.java.DelegatedVariableTypeJavaTreeExtractor;
 import codemining.ast.java.JavaAstTreeExtractor;
 import codemining.ast.java.VariableTypeJavaTreeExtractor;
-import codemining.java.codeutils.MethodExtractor;
+import codemining.java.codedata.MethodRetriever;
 import codemining.java.tokenizers.JavaTokenizer;
 import codemining.lm.tsg.FormattedTSGrammar;
 import codemining.lm.tsg.TSGNode;
@@ -123,7 +123,7 @@ public class SampleBlockedTSG {
                         nNodes += ast.getTreeSize();
                         filter.addTree(ast);
                     } else {
-                        for (final MethodDeclaration method : MethodExtractor.getMethods(fi)) {
+                        for (final MethodDeclaration method : MethodRetriever.getMethodNodes(fi).values()) {
                             if (method.getBody() == null) {
                                 continue;
                             }

@@ -59,10 +59,12 @@ public class TempletizedCollapsedGibbsSampler extends CollapsedGibbsSampler {
 				new TempletizedTSGrammar(format));
 	}
 
+	/*
 	@Override
 	protected void createPosteriorComputer(final double avgTreeSize,
 			final double DPconcentration, final TSGrammar<TSGNode> grammar) {
 		posteriorComputer = new ClassicTsgPosteriorComputer(grammar,
 				avgTreeSize, DPconcentration);
 	}
+	*/
 }
