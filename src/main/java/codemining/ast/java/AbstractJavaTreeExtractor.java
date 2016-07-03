@@ -31,7 +31,8 @@ import codemining.languagetools.ParseType;
 @DefaultSerializer(JavaSerializer.class)
 public abstract class AbstractJavaTreeExtractor extends AbstractTreeExtractor {
 
-	private static final long serialVersionUID = -4515326266227881706L;
+	//private static final long serialVersionUID = -4515326266227881706L;
+	private static final long serialVersionUID = 5024821311795558293L;
 
 	public static final Function<Integer, String> JAVA_NODETYPE_CONVERTER = (Function<Integer, String> & Serializable) nodeType -> ASTNode
 			.nodeClassForType(nodeType).getSimpleName();
@@ -39,7 +40,8 @@ public abstract class AbstractJavaTreeExtractor extends AbstractTreeExtractor {
 	/**
 	 * A node printer using the symbols.
 	 */
-	private final TreeToString javaNodeToString = node -> getSymbol(node.getData()).toString(JAVA_NODETYPE_CONVERTER);
+	private transient final TreeToString javaNodeToString =
+		node -> getSymbol(node.getData()).toString(JAVA_NODETYPE_CONVERTER);
 
 	public AbstractJavaTreeExtractor() {
 		super();
