@@ -40,11 +40,13 @@ public class SampleTSG {
 	 */
 	public static void main(final String[] args) throws IOException,
 	SerializationException {
-		if (args.length != 3) {
+		if (args.length < 3) {
 			System.err
-			.println("Usage <TrainingDir> normal|binary|binary-metavariables|metavariables|variables <#iterations>");
+			.println("Usage <TrainingDir> normal|binary|binary-metavariables|metavariables|variables <#iterations> <optional serialization file>");
 			return;
 		}
+		final String serializedFile = 
+				args.length == 4 ? args[3].trim() + ".ser" : "tsg.ser";
 		final int nIterations = Integer.parseInt(args[2]);
 
 		final File samplerCheckpoint = new File("tsgSampler.ser");
@@ -138,7 +140,7 @@ public class SampleTSG {
 			grammarToUse = (FormattedTSGrammar) sampler.getSampleGrammar();
 		}
 		try {
-			Serializer.getSerializer().serialize(grammarToUse, "tsg.ser");
+			Serializer.getSerializer().serialize(grammarToUse, serializedFile);
 		} catch (final Throwable e) {
 			LOGGER.severe("Failed to serialize grammar: "
 					+ ExceptionUtils.getFullStackTrace(e));
