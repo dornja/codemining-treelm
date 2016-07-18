@@ -71,6 +71,13 @@ public abstract class AbstractJavaTreeExtractor extends AbstractTreeExtractor {
 				return TreeNode.create(entry.getKey(), entry.getValue().nChildProperties());
 			}
 		}
+		
+		// temp workaround?
+		for (final Entry<Integer, AstNodeSymbol> entry : nodeAlphabet.entrySet()) {
+			if (entry.getValue().nodeType == ASTNode.METHOD_DECLARATION) {
+				return TreeNode.create(entry.getKey(), entry.getValue().nChildProperties());
+			}
+		}
 		throw new IllegalStateException("A compilation unit must have been here...");
 	}
 
