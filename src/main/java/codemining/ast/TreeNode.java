@@ -563,7 +563,7 @@ public final class TreeNode<T extends Serializable> implements Serializable {
     @Override
     public int hashCode() {
         if (childrenProperties.size() > 0) {
-            return Objects.hashCode(nodeData, childrenProperties.get(0).hashCode());
+            return Objects.hashCode(nodeData, childrenProperties);
         } else {
             return Objects.hashCode(nodeData);
         }

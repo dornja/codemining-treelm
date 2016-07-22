@@ -34,7 +34,7 @@ import com.google.common.util.concurrent.AtomicDouble;
  * @author Miltos Allamanis <m.allamanis@ed.ac.uk>
  *
  */
-class ClassicTsgPosteriorComputer implements
+public class ClassicTsgPosteriorComputer implements
 		ITsgPosteriorProbabilityComputer<TSGNode>, IRuleCreator {
 
 	private class HyperparameterOptimizable implements
@@ -204,12 +204,20 @@ class ClassicTsgPosteriorComputer implements
 
 	protected final CFGPrior prior;
 
-	ClassicTsgPosteriorComputer(final TSGrammar<TSGNode> grammar,
+	public ClassicTsgPosteriorComputer(final TSGrammar<TSGNode> grammar,
 			final double avgTreeSize, final double DPconcentration) {
 		this.grammar = grammar;
 		prior = new CFGPrior(grammar.getTreeExtractor(), this);
 		concentrationParameter = DPconcentration;
 		geometricProbability = 1. / avgTreeSize;
+	}
+	
+	public ClassicTsgPosteriorComputer( final TSGrammar<TSGNode> grammar,
+			final ClassicTsgPosteriorComputer orig ) {
+		this.grammar = grammar;
+		this.prior = orig.prior;
+		this.concentrationParameter = orig.concentrationParameter;
+		this.geometricProbability = orig.geometricProbability;
 	}
 
 	@Override

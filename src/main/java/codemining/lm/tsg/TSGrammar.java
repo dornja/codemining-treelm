@@ -45,7 +45,7 @@ ITreeSubstitutionGrammar<T> {
 	 */
 	protected final ConcurrentMap<T, ConcurrentHashMultiset<TreeNode<T>>> grammar;
 
-	ITsgPosteriorProbabilityComputer<T> posteriorComputer = null;
+	protected ITsgPosteriorProbabilityComputer<T> posteriorComputer = null;
 
 	/**
 	 * UNK node.
@@ -322,6 +322,10 @@ ITreeSubstitutionGrammar<T> {
 	public final void setPosteriorComputer(
 			final ITsgPosteriorProbabilityComputer<T> computer) {
 		posteriorComputer = checkNotNull(computer);
+	}
+	
+	public final ITsgPosteriorProbabilityComputer<T> getPosteriorComputer() {
+		return posteriorComputer;
 	}
 
 	@Override
