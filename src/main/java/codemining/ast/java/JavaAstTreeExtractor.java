@@ -42,7 +42,7 @@ public class JavaAstTreeExtractor extends AbstractJavaTreeExtractor {
 		/**
 		 * Store all the TreeNodes that have been extracted.
 		 */
-		final Map<ASTNode, TreeNode<Integer>> computedNodes = Maps
+		public final Map<ASTNode, TreeNode<Integer>> computedNodes = Maps
 				.newIdentityHashMap();
 
 		final boolean useComments;
