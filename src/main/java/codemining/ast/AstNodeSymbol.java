@@ -137,6 +137,10 @@ public class AstNodeSymbol implements Serializable {
 		return childProperties.get(i);
 	}
 
+	public Set<String> getAnnotations() {
+		return annotations.keySet();
+	}
+
 	public Set<String> getSimpleProperties() {
 		return simplePropValues.keySet();
 	}
