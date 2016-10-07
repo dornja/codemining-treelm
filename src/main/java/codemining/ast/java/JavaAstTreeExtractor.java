@@ -16,6 +16,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.eclipse.jdt.core.dom.*;
 import org.eclipse.jdt.core.dom.Modifier.ModifierKeyword;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -139,8 +140,8 @@ public class JavaAstTreeExtractor extends AbstractJavaTreeExtractor {
 				computedNodes.put(node,
 						postProcessNodeBeforeAdding(treeNode, node));
 			} catch (final Exception e) {
-				LOGGER.warning("Failed to get Tree for node and children"
-						+ node + ExceptionUtils.getFullStackTrace(e));
+				LOGGER.warning("Failed to get Tree for node and children\n=====\n"
+						+ node + "\n=====\n" + ExceptionUtils.getFullStackTrace(e));
 			}
 		}
 	}
@@ -237,6 +238,12 @@ public class JavaAstTreeExtractor extends AbstractJavaTreeExtractor {
 			.getLogger(JavaAstTreeExtractor.class.getName());
 
 	private static final long serialVersionUID = 8839242786256127809L;
+
+	public JavaAstTreeExtractor() {}
+
+	public JavaAstTreeExtractor(final BiMap<Integer, AstNodeSymbol> alphabet) {
+		super(alphabet);
+	}
 
 	/**
 	 * Add further annotations to the given symbol. Useful for classes that will
@@ -525,7 +532,8 @@ public class JavaAstTreeExtractor extends AbstractJavaTreeExtractor {
 		// Set children properties
 		final List<StructuralPropertyDescriptor> descriptors = JavaAstPropertiesData
 				.getChildProperties(symbol.nodeType);
-		checkArgument(descriptors.size() == treeNode.nProperties());
+		checkArgument(descriptors.size() == treeNode.nProperties(),
+			"%s != %s", descriptors.size(), treeNode.nProperties());
 		for (int i = 0; i < descriptors.size(); i++) {
 			if (treeNode.getChildrenByProperty().get(i).isEmpty()) {
 				continue; // Nothing to do.
