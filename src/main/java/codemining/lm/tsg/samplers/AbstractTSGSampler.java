@@ -3,7 +3,9 @@ package codemining.lm.tsg.samplers;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -212,8 +214,11 @@ public abstract class AbstractTSGSampler implements Serializable {
 
 		int currentIteration = 0;
 		for (currentIteration = 0; currentIteration < iterations; currentIteration++) {
-			System.out.println("=======Iteration " + currentIteration
-					+ "==============");
+			System.out.printf(
+				"======= Iteration %d: %s =======\n",
+				currentIteration,
+				DateFormat.getDateTimeInstance().format( new Date() )
+			);
 			sampleAllTreesOnce(currentIteration, iterations, stop);
 			if (CALC_LOGPROB && currentIteration % CALC_INTERVAL == 0) {
 				System.out.println(calculateCorpusLogProb());
