@@ -446,6 +446,8 @@ public class JavaAstTreeExtractor extends AbstractJavaTreeExtractor {
 			return ast.newTypeLiteral();
 		case ASTNode.TYPE_PARAMETER:
 			return ast.newTypeParameter();
+		case ASTNode.UNION_TYPE:
+			return ast.newUnionType();
 		case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
 			return ast.newVariableDeclarationExpression(ast
 					.newVariableDeclarationFragment());
